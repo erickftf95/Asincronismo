@@ -1,0 +1,28 @@
+//Las promesas (Promises) representan la eventual finalización o el fallo de una operación 
+//asincrónica y su valor resultante. Críticamente, resuelven el problema del "Callback Hell" 
+//al permitir encadenar operaciones de forma lineal y legible mediante los métodos .then() y 
+//.catch(), estandarizando el manejo de errores de forma centralizada y solucionando la 
+//inversión de control. No obstante, un encadenamiento excesivo de .then() todavía puede 
+//volverse verboso y complejo de depurar si la lógica de negocio se expande de manera 
+//descontrolada.
+
+// Archivo: promesa_ejemplo.js
+function obtenerUsuarioPromise(id) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (id === 1) {
+                resolve({ id: 1, nombre: "Erick", rol: "Desarrollador" });
+            } else {
+                reject("Usuario no encontrado");
+            }
+        }, 1000);
+    });
+}
+
+obtenerUsuarioPromise(1)
+    .then(usuario => {
+        console.log("Usuario obtenido con promesa:", usuario);
+    })
+    .catch(error => {
+        console.error("Error en la promesa:", error);
+    });

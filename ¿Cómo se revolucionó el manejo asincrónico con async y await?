@@ -1,0 +1,32 @@
+//Las palabras clave async y await 
+//permiten escribir código asincrónico que se estructura y lee de forma idéntica al código 
+//sincrónico tradicional. Desde un punto de vista crítico, representan un cambio de paradigma 
+//absoluto: eliminan por completo la necesidad de encadenar métodos, facilitan el uso de 
+//bloques nativos try/catch para la gestión limpia de excepciones y optimizan notablemente la 
+//depuración en la pila de llamadas (call stack), elevando la mantenibilidad del software al 
+//máximo nivel.
+
+// Archivo: async_await_ejemplo.js
+function obtenerUsuarioPromise(id) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if (id === 1) {
+                resolve({ id: 1, nombre: "Erick", rol: "Desarrollador" });
+            } else {
+                reject("Usuario no encontrado");
+            }
+        }, 1000);
+    });
+}
+
+async function gestionarUsuario() {
+    try {
+        console.log("Buscando usuario...");
+        const usuario = await obtenerUsuarioPromise(1);
+        console.log("Usuario obtenido con async/await:", usuario);
+    } catch (error) {
+        console.error("Error capturado con async/await:", error);
+    }
+}
+
+gestionarUsuario();

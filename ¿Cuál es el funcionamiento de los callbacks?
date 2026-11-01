@@ -1,0 +1,26 @@
+//Un callback es una función que se pasa como argumento a otra función para ser ejecutada 
+//posteriormente una vez que una operación asincrónica finaliza
+//Desde una perspectiva crítica, aunque permitieron las primeras 
+//operaciones no bloqueantes en un entorno de un solo hilo mediante el Event Loop, presentan 
+//graves problemas de escalabilidad conocidos como el "Callback Hell" (Pirámide del Infierno).
+//El anidamiento horizontal excesivo y un manejo de errores disperso dificultan drásticamente 
+//la legibilidad y el mantenimiento del código.
+
+// Archivo: callback_ejemplo.js
+function obtenerUsuario(id, callback) {
+    setTimeout(() => {
+        if (id === 1) {
+            callback(null, { id: 1, nombre: "Erick", rol: "Desarrollador" });
+        } else {
+            callback("Usuario no encontrado", null);
+        }
+    }, 1000);
+}
+
+obtenerUsuario(1, (error, usuario) => {
+    if (error) {
+        console.error("Error:", error);
+        return;
+    }
+    console.log("Usuario obtenido con callback:", usuario);
+});
